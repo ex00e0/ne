@@ -1,7 +1,10 @@
 @extends('layouts.header')
-@section('title','вход')
+@section('title','регистрация')
 @section('content')
 
+@error('name')
+    <div class="alert alert-danger">{{ $message }}</div>
+@enderror
 @error('email')
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
@@ -10,10 +13,13 @@
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
 
-
 <div class="container">
-<form action="{{route('login')}}" method="post">
+<form action="{{route('reg')}}" method="post">
     @csrf
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Имя</label>
+        <input type="text" class="form-control" name="name">
+     </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Адрес электронной почты</label>
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">

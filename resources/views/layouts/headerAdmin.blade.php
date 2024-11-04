@@ -33,10 +33,10 @@
 
             @auth
             <li class="nav-item">
-              <a class="nav-link" href="{{route('appl')}}">Подать заявку</a>
+              <a class="nav-link" href="{{route('admin')}}">Посты</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{route('my_appl')}}">Мои заявки</a>
+              <a class="nav-link" href="{{route('admin')}}">Заявки</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{route('exit')}}">Выйти</a>

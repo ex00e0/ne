@@ -5,7 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class Post extends Model
 {
-    protected $fillable = ['name', 'description', 'boss_id', 'start', 'end', 'status'];
+    protected $fillable = [
+        'title',
+        'text',
+        'image',
+    ];
 }
