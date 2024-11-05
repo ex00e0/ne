@@ -10,8 +10,10 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
 @error('success')
     <script>alert("{{ $message }}");</script>
 @enderror
-
-
+<div class="container">
+<a href="{{route('show_create')}}" class="btn btn-primary" style="background-color:#4964ac;">Создать пост</a>
+</div>
+<div style="height:1.5vmax;"></div>
 <div class="container">
 
 @foreach ($posts as  $appl)
@@ -25,8 +27,8 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
     <p class="card-text">{{$appl->text}}</p>
     <p class="card-text" style="color:darkgrey;"><?= substr($appl->created_at, 8, 2).".".substr($appl->created_at, 5, 2).".".substr($appl->created_at, 0, 4)?></p>
 
-    <!-- <a href="{{route('accept', ['id'=>$appl->id])}}" class="btn btn-primary" style="background-color:#4964ac;">Принять</a>
-    <a href="{{route('reject', ['id'=>$appl->id])}}" class="btn btn-danger">Отклонить</a> -->
+    <a href="{{route('edit', ['id'=>$appl->id])}}" class="btn btn-primary" style="background-color:#4964ac;">Редактировать</a>
+    <a href="{{route('delete', ['id'=>$appl->id])}}" class="btn btn-danger">Удалить</a>
 
   </div>
 </div>

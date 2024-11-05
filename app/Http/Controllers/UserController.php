@@ -161,4 +161,68 @@ class UserController extends Controller
         $data =  ['posts'=>Post::latest()->get()];
         return view('admin/posts', $data);
     }
+
+    public function show_edit (Application $id) {
+        $data =  ['posts'=>Post::where('id', $id->id)->latest()->get()];
+        return view('admin/edit', $data);
+    }
+
+    public function show_create () {
+        return view('admin/create');
+    }
+
+    public function create (Request $request) {
+
+        $validator = Validator::make($request->all(), [
+            "title"=>["required", "max:40"],
+            "text"=>["required"],
+            "image"=>["required", "image"],
+        ],
+        $messages = [
+            'title.required' => 'Не введено имя',
+            'text.required' => 'Не введена электронная почта',
+            'title.max' => 'Название должно быть не более 40 символов',
+            'image.required' => 'Не отправлено фото',
+            'image.image' => 'Отправлено не изображение',
+        ]
+    );
+    if ($validator->fails()) {
+        return back()->withErrors($validator);
+    }
+    else {
+        $user = Post::create(['title'=>$request->title,
+        'text'=>$request->text,
+        'image'=>$request->image]);
+
+        return redirect()->route('admin/posts');
+    }
+        
+    }
+
+    public function edit (Request $request) {
+
+        $validator = Validator::make($request->all(), [
+            "title"=>["required", "max:40"],
+            "text"=>["required"],
+        ],
+        $messages = [
+            'title.required' => 'Не введено имя',
+            'text.required' => 'Не введена электронная почта',
+            'title.max' => 'Название должно быть не более 40 символов',
+        ]
+    );
+    if ($validator->fails()) {
+        return back()->withErrors($validator);
+    }
+    else {
+        // $user = Application::fill(['title'=>$request->name,
+        // 'email'=>$request->email,
+        // 'password'=>Hash::make($request->password)]);
+
+        // Auth::login($user);
+        return redirect()->route('admin/posts')->withErrors(['success' => 'Пост изменен!']);
+    }
+        
+    }
+
 }
